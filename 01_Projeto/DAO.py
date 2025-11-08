@@ -1,24 +1,28 @@
 from Models import *
+import os
+
+BASE_PATH = os.path.dirname(__file__)  
 
 class DaoCategoria:
     @classmethod
     def salvar(cls, categoria):
-        with open('categoria.txt', 'a') as arq:
-            arq.writelines(categoria)
-            arq.writelines('\n')
+        file_path = os.path.join(BASE_PATH, 'categoria.txt')
+        with open(file_path, 'a', encoding='utf-8') as arq:
+            arq.write(categoria + '\n')
 
     @classmethod
     def ler(cls):
-        with open('categoria.txt', 'r') as arq:
-            cls.categoria = arq.readlines()
+        file_path = os.path.join(BASE_PATH, 'categoria.txt')
+        # se o arquivo não existir, cria vazio
+        if not os.path.exists(file_path):
+            open(file_path, 'w', encoding='utf-8').close()
 
-        cls.categoria = list(map(lambda x: x.replace('\n', ''), cls.categoria))
+        with open(file_path, 'r', encoding='utf-8') as arq:
+            linhas = [linha.strip() for linha in arq.readlines()]
 
-        cat = []
-        for i in cls.categoria:
-            cat.append(Categoria(i))
-
+        cat = [Categoria(i) for i in linhas if i]
         return cat
+
 
 class DaoVenda:
     @classmethod
