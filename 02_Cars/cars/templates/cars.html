@@ -1,0 +1,129 @@
+{% block content %}
+<style>
+  :root {
+    --primary: #0096c7;
+    --dark: #1f2933;
+    --light: #f4f6f8;
+    --card-bg: #ffffff;
+    --muted: #6b7280;
+    --success: #059669;
+  }
+
+  body {
+    background-color: var(--light);
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .car-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+  }
+
+  .car-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .car-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.15);
+  }
+
+  .car-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    background-color: #f9fafb;
+  }
+
+  .no-photo {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e5e7eb;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .car-info {
+    padding: 14px 16px;
+    text-align: left;
+  }
+
+  .car-info h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .car-year {
+    display: block;
+    margin-top: 2px;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  .car-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  .car-price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--success);
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .no-results {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--muted);
+    margin-top: 40px;
+  }
+</style>
+
+<div class="car-grid">
+  {% if cars %}
+    {% for car in cars %}
+      <a href="#">
+        <div class="car-card">
+          {% if car.photo %}
+            <img src="{{ car.photo.url }}" alt="{{ car.brand }} {{ car.model }}">
+          {% else %}
+            <div class="no-photo">Sem imagem</div>
+          {% endif %}
+
+          <div class="car-info">
+            <h2>{{ car.brand }} {{ car.model }}</h2>
+            <span class="car-year">{{ car.factory_year }}</span>
+
+            <div class="car-meta">
+              <span></span>
+              <span class="car-price">R$ {{ car.value }}</span>
+            </div>
+          </div>
+        </div>
+      </a>
+    {% endfor %}
+  {% else %}
+    <p class="no-results">Nenhum carro encontrado.</p>
+  {% endif %}
+</div>
+{% endblock %}
