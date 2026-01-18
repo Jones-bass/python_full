@@ -7,11 +7,49 @@
     --card-bg: #ffffff;
     --muted: #6b7280;
     --success: #059669;
+    --input-bg: #ffffff;
+    --input-border: #e5e7eb;
+    --button-bg: var(--primary);
+    --button-color: #ffffff;
+    --button-hover-bg: #0077b6;
   }
 
   body {
     background-color: var(--light);
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .search-form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+
+  .search-form input[type="text"] {
+    padding: 12px 16px;
+    font-size: 1rem;
+    border: 1px solid var(--input-border);
+    border-radius: 6px;
+    width: 100%;
+    max-width: 400px;
+    background-color: var(--input-bg);
+    color: var(--dark);
+  }
+
+  .search-form button {
+    padding: 12px 20px;
+    margin-left: 10px;
+    font-size: 1rem;
+    background-color: var(--button-bg);
+    color: var(--button-color);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .search-form button:hover {
+    background-color: var(--button-hover-bg);
   }
 
   .car-grid {
@@ -98,6 +136,11 @@
     margin-top: 40px;
   }
 </style>
+
+<form method="GET" action="{% url 'cars_list' %}" class="search-form">
+  <input type="text" name="search" placeholder="Tipo de carro...">
+  <button type="submit">Buscar</button>
+</form>
 
 <div class="car-grid">
   {% if cars %}
