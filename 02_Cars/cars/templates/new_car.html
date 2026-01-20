@@ -70,14 +70,43 @@
     margin-bottom: 20px;
   }
 
+  .alert-container {
+    margin-bottom: 20px;
+  }
+
+  .alert {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+  }
+
+  .alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+
+  .alert-success {
+    background-color: #d4edda;
+    color: #155724;
+  }
 </style>
 
 <div class="form-container">
   <h2 class="form-heading">Cadastro de Novo Carro</h2>
 
+  {% if messages %}
+  <div class="alert-container">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+      {{ message }}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    
+
     <table>
       <!-- Brand -->
       <tr>
