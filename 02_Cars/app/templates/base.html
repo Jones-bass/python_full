@@ -8,8 +8,10 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap">
 
   <style>
+    /* Variáveis Globais */
     :root {
       --primary: #0096c7;
+      --primary-hover: #32bbe8; 
       --dark: #1f2933;
       --light: #f4f6f8;
       --card-bg: #ffffff;
@@ -20,44 +22,49 @@
       --button-bg: var(--primary);
       --button-color: #ffffff;
       --button-hover-bg: #0077b6;
+      --error-bg: #f8d7da;
+      --danger-color: #d9534f;
+      --danger-hover-color: #d2221c;
+      --error-color: #721c24;
+      --success-bg: #d4edda;
+      --success-color: #155724;
     }
 
+    /* Tipografia e Estilo Base */
     body {
       background-color: var(--light);
-      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-
+      font-family: 'Open Sans', sans-serif;
       color: var(--dark);
       margin: 0;
       padding: 0;
     }
 
+    a {
+      text-decoration: none;
+    }
+
     header {
-      background-color: #0096c7;
-      color: #fff;
+      background-color: var(--primary);
+      color: var(--button-color);
       text-align: center;
     }
-
-    footer {
-      background-color: #ccc;
-      color: #333;
-      padding: 20px;
-      text-align: center;
-    }
-
+    
+    /* Navegação */
     nav {
-      background-color: #0096c7;
-      color: #fff;
+      background-color: var(--primary);
+      color: var(--button-color);
       height: 50px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 0 20px;
     }
 
     nav ul {
       list-style: none;
-      margin: 0;
-      padding: 0;
       display: flex;
+      padding: 0;
+      margin: 0;
     }
 
     nav ul li {
@@ -65,29 +72,27 @@
     }
 
     nav ul li a {
-      color: #fff;
+      color: var(--button-color);
       text-decoration: none;
       font-size: 16px;
       padding: 15px;
-      transition: all 0.3s ease;
+      transition: background-color 0.3s ease;
     }
 
     nav ul li a:hover {
-      background-color: #32bbe8;
+      background-color: var(--primary-hover);
     }
 
     nav ul li.active a {
       background-color: #666;
     }
 
-    nav ul li.active a:hover {
-      background-color: #999;
-    }
-
+    /* Conteúdo Principal */
     .container {
       padding: 20px;
     }
 
+    /* Formulários */
     .form-container {
       background-color: var(--card-bg);
       border-radius: 10px;
@@ -106,34 +111,11 @@
       color: var(--dark);
     }
 
-    .form-group input {
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
       width: 100%;
       padding: 12px;
-      margin-top: 8px;
-      border: 1px solid var(--input-border);
-      border-radius: 6px;
-      font-size: 1rem;
-      background-color: var(--input-bg);
-      color: var(--dark);
-    }
-
-    .input:hover {
-      background-color: var(--button-hover-bg);
-    }
-
-    table {
-      width: 100%;
-      margin-bottom: 20px;
-    }
-
-    input[type="text"],
-    input[type="password"],
-    input[type="file"],
-    input[type="number"],
-    select,
-    .input {
-      width: 100%;
-      padding: 12px 16px;
       margin-top: 8px;
       border: 1px solid var(--input-border);
       border-radius: 6px;
@@ -143,21 +125,9 @@
       box-sizing: border-box;
     }
 
-    .input {
+    .button {
       background-color: var(--button-bg);
-      color: var(--light);
-      border: none;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .input:hover {
-      background-color: var(--button-hover-bg);
-    }
-
-    input[type="submit"] {
-      background-color: var(--button-bg);
-      color: var(--light);
+      color: var(--button-color);
       padding: 12px 16px;
       font-size: 1rem;
       border: none;
@@ -167,15 +137,34 @@
       transition: background-color 0.3s ease;
     }
 
-    .form-group {
-      margin-bottom: 15px;
+    .button:hover {
+      background-color: var(--button-hover-bg);
     }
 
-    .form-group label {
-      font-weight: 600;
-      color: var(--dark);
+    /* Botão Danger */
+    .button-danger {
+      background-color:var(--danger-color);
+      color: var(--button-color);
+      padding: 12px 16px;
+      font-size: 1rem;
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-decoration: none !important;
     }
 
+    .button-danger:hover {
+      background-color: var(--danger-hover-color);
+    }
+
+    .buttons-container {
+      display: flex;
+      margin-top: 30px;
+      gap: 20px;
+    }
 
     .form-heading {
       font-size: 1.5rem;
@@ -184,6 +173,7 @@
       margin-bottom: 20px;
     }
 
+    /* Alertas */
     .alert-container {
       margin-bottom: 20px;
     }
@@ -195,14 +185,15 @@
     }
 
     .alert-error {
-      background-color: #f8d7da;
-      color: #721c24;
+      background-color: var(--error-bg);
+      color: var(--error-color);
     }
 
     .alert-success {
-      background-color: #d4edda;
-      color: #155724;
+      background-color: var(--success-bg);
+      color: var(--success-color);
     }
+
   </style>
 </head>
 
@@ -215,7 +206,7 @@
       <ul>
         {% if user.is_authenticated %}
         <li>{{ user.username }}</li>
-        <li><a href="{% url 'new_car' %}">Registrar Cars</a></li>
+        <li><a href="{% url 'new_car' %}">Registrar Carro</a></li>
         {% endif %}
 
         {% if not user.is_authenticated %}
@@ -232,11 +223,10 @@
     </nav>
   </header>
 
-
   <main class="container">
     {% block content %}{% endblock %}
   </main>
-
+  
 </body>
 
 </html>

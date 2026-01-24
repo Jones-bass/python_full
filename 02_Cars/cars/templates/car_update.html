@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <style>
+    /* Formulário com bordas arredondadas e sombras mais suaves */
+    form {
+      max-width: 800px;
+      margin: auto;
+      padding: 14px;
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Título mais moderno e centralizado */
+    form h1 {
+      font-size: 2rem;
+      text-align: center;
+      color: #333;
+      font-weight: 400;
+    }
+
+    /* Estilo da tabela mais clean e fluída */
+    table {
+      margin: 0 auto;
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      font-weight: 600;
+    }
+
+    /* Inputs e campos com bordas mais suaves e transições modernas */
+    input[type="text"], input[type="number"], select, textarea {
+      padding: 12px;
+      font-size: 14px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      width: 100%; 
+      box-sizing: border-box;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    /* Efeito de foco mais elegante */
+    input[type="text"]:focus, input[type="number"]:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #0096c7;
+      box-shadow: 0 0 10px rgba(0, 150, 199, 0.2);
+    }
+
+    /* Mensagens de erro com estilo sutil */
+    .error-message {
+      color: #d9534f;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    a {
+      text-decoration: none !important;
+    }
+  </style>
+
+  <!-- Certifique-se de que o Font Awesome está sendo carregado -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h1>Update Car</h1>
+    <table>
+      {{ form.as_table }}
+    </table>
+    <div class="buttons-container">
+      <input type="submit" value="Save" class="button">
+      <a href="{% url 'cars_list' %}" class="button-danger">X</a>
+    </div>
+  </form>
+{% endblock %}
