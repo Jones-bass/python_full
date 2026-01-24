@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <style>
+    /* Estilo compartilhado com o car-card */
+    .car-card {
+      background-color: #f9f9f9;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      overflow: hidden;
+      text-align: center;
+      transition: all 0.3s ease;
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .car-card:hover {
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      transform: translateY(-4px);
+    }
+
+    .car-card h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin: 15px 0;
+      color: #333;
+    }
+
+    .car-card p {
+      font-size: 1.1rem;
+      margin: 8px 0;
+      color: #555;
+    }
+
+    .car-card p strong {
+      color: #0096c7;
+    }
+
+    .buttons-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #0096c7;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+      margin: 0 10px;
+    }
+
+    .btn:hover {
+      background-color: #108eb8;
+    }
+
+    .btn-danger {
+      background-color: #d9534f;
+      text-decoration: none !important;
+    }
+
+    .btn-danger:hover {
+      background-color: #d2221c;
+    }
+
+    .error-message {
+      color: #d9534f;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    a {
+      text-decoration: none !important;
+    }
+  </style>
+
+  <div class="car-card">
+    <h2>Excluir Carro</h2>
+    <p>Tem certeza que deseja excluir o carro <strong>{{ object.brand }} {{ object.model }}</strong>?</p>
+    <form method="post">
+      {% csrf_token %}
+      <div class="buttons-container">
+        <button type="submit" class="btn btn-danger">Excluir Carro</button>
+        <a href="{% url 'car_detail' pk=object.pk %}" class="btn btn-secondary">Cancelar</a>
+      </div>
+    </form>
+  </div>
+{% endblock %}
