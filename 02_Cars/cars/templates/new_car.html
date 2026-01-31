@@ -3,8 +3,62 @@
 {% block content %}
 
 <style>
-  
-  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: left;
+  }
+
+  td {
+    vertical-align: middle;
+  }
+
+  /* Inputs e campos com bordas mais suaves e transições modernas */
+  input[type="text"], input[type="number"], select, textarea {
+    padding: 12px;
+    font-size: 14px;
+    border: 2px solid var(--input-border);
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  /* Efeito de foco mais elegante */
+  input[type="text"]:focus, input[type="number"]:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 10px rgba(0, 150, 199, 0.2);
+  }
+
+  /* Estilo para as mensagens de erro, se existirem */
+  .error-message {
+    color: var(--danger-color);
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  /* Para manter consistência com a estética de botão */
+  .input {
+    padding: 12px 16px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: var(--primary);
+    color: var(--button-color);
+    width: 100%;
+    transition: background-color 0.3s ease;
+  }
+
+  .input:hover {
+    background-color: var(--button-hover-bg);
+  }
 </style>
 
 <div class="form-container">
@@ -22,47 +76,47 @@
 
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-
+    
     <table>
       <!-- Brand -->
       <tr>
-        <td>{{ form.brand.label }}</td>
+        <td><label for="{{ form.brand.id_for_label }}">{{ form.brand.label }}</label></td>
         <td>{{ form.brand }}</td>
       </tr>
 
       <!-- Model -->
       <tr>
-        <td>{{ form.model.label }}</td>
+        <td><label for="{{ form.model.id_for_label }}">{{ form.model.label }}</label></td>
         <td>{{ form.model }}</td>
       </tr>
 
       <!-- Factory Year -->
       <tr>
-        <td>{{ form.factory_year.label }}</td>
+        <td><label for="{{ form.factory_year.id_for_label }}">{{ form.factory_year.label }}</label></td>
         <td>{{ form.factory_year }}</td>
       </tr>
 
       <!-- Model Year -->
       <tr>
-        <td>{{ form.model_year.label }}</td>
+        <td><label for="{{ form.model_year.id_for_label }}">{{ form.model_year.label }}</label></td>
         <td>{{ form.model_year }}</td>
       </tr>
 
       <!-- Plate -->
       <tr>
-        <td>{{ form.plate.label }}</td>
+        <td><label for="{{ form.plate.id_for_label }}">{{ form.plate.label }}</label></td>
         <td>{{ form.plate }}</td>
       </tr>
 
       <!-- Value -->
       <tr>
-        <td>{{ form.value.label }}</td>
+        <td><label for="{{ form.value.id_for_label }}">{{ form.value.label }}</label></td>
         <td>{{ form.value }}</td>
       </tr>
 
       <!-- Photo -->
       <tr>
-        <td>{{ form.photo.label }}</td>
+        <td><label for="{{ form.photo.id_for_label }}">{{ form.photo.label }}</label></td>
         <td>{{ form.photo }}</td>
       </tr>
     </table>
