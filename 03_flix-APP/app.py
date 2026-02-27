@@ -1,5 +1,5 @@
 import streamlit as st
-
+from genres.page import show_genres
 
 def main():
     menu_option = st.sidebar.selectbox(
@@ -11,7 +11,7 @@ def main():
         st.write('Inicio')
 
     if menu_option == 'Gêneros':
-        st.write('Gêneros')
+        show_genres()
 
     if menu_option == 'Atores/Atrizes':
         st.write('Atores/Atrizes')
