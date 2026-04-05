@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-JS - Marcas
+JS - Categoria
 {% endblock %}
 
 {% block content %}
@@ -37,9 +37,9 @@ JS - Marcas
 <div class="row mb-3">
   <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
 
-    <form method="get" action="{% url 'brand_list' %}" class="d-flex">
+    <form method="get" action="{% url 'category_list' %}" class="d-flex">
       <div class="input-group">
-        <input type="text" class="form-control" name="name" placeholder="Buscar marca..."
+        <input type="text" class="form-control" name="name" placeholder="Buscar categoria..."
           value="{{ request.GET.name }}">
         <button type="submit" class="btn btn-primary">
           <i class="bi bi-search"></i>
@@ -48,9 +48,9 @@ JS - Marcas
     </form>
 
     <!-- BOTÃO NOVO -->
-    {% if perms.brands.add_brand %}
-    <a href="{% url 'brand_create' %}" class="btn btn-success">
-      <i class="bi bi-plus-lg"></i> Nova Marca
+    {% if perms.categories.add_category %}
+    <a href="{% url 'category_create' %}" class="btn btn-success">
+      <i class="bi bi-plus-lg"></i> Nova Categoria
     </a>
     {% endif %}
 
@@ -68,33 +68,33 @@ JS - Marcas
         </tr>
       </thead>
       <tbody>
-        {% for brand in brands %}
+        {% for category in categories %}
         <tr>
           <td>
-            <a href="{% url 'brand_detail' brand.id %}" class="fw-semibold text-decoration-none">
-              #{{ brand.id }}
+            <a href="{% url 'category_detail' category.id %}" class="fw-semibold text-decoration-none">
+              #{{ category.id }}
             </a>
           </td>
 
-          <td class="fw-medium">{{ brand.name }}</td>
+          <td class="fw-medium">{{ category.name }}</td>
 
-          <td class="col-descricao" title="{{ brand.description }}">
-            {{ brand.description|truncatechars:100 }}
+          <td class="col-descricao" title="{{ category.description }}">
+            {{ category.description|truncatechars:100 }}
           </td>
 
           <td class="text-center">
-            <a href="{% url 'brand_detail' brand.id %}" class="btn btn-info btn-sm btn-icon" title="Visualizar">
+            <a href="{% url 'category_detail' category.id %}" class="btn btn-info btn-sm btn-icon" title="Visualizar">
               <i class="bi bi-eye"></i>
             </a>
 
-            {% if perms.brands.change_brand %}
-            <a href="{% url 'brand_update' brand.id %}" class="btn btn-warning btn-sm btn-icon" title="Editar">
+            {% if perms.categorys.change_category %}
+            <a href="{% url 'category_update' category.id %}" class="btn btn-warning btn-sm btn-icon" title="Editar">
               <i class="bi bi-pencil"></i>
             </a>
             {% endif %}
 
-            {% if perms.brands.delete_brand %}
-            <a href="{% url 'brand_delete' brand.id %}" class="btn btn-danger btn-sm btn-icon btn-delete"
+            {% if perms.categorys.delete_category %}
+            <a href="{% url 'category_delete' category.id %}" class="btn btn-danger btn-sm btn-icon btn-delete"
               title="Excluir">
               <i class="bi bi-trash"></i>
             </a>
