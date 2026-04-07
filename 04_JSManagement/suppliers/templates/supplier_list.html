@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block title %}
+JS - Fornecedores
+{% endblock %}
+
+{% block content %}
+
+<style>
+  .table th {
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+
+  .table td {
+    vertical-align: middle;
+  }
+
+  .col-descricao {
+    max-width: 350px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+  }
+</style>
+
+<div class="row mb-3">
+  <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+
+    <form method="get" action="{% url 'supplier_list' %}" class="d-flex">
+      <div class="input-group">
+        <input type="text" class="form-control" name="name" placeholder="Buscar marca..."
+          value="{{ request.GET.name }}">
+        <button type="submit" class="btn btn-primary">
+          <i class="bi bi-search"></i>
+        </button>
+      </div>
+    </form>
+
+    <!-- BOTÃO NOVO -->
+    {% if perms.suppliers.add_supplier %}
+    <a href="{% url 'supplier_create' %}" class="btn btn-success">
+      <i class="bi bi-plus-lg"></i> Novo Fornecedor
+    </a>
+    {% endif %}
+
+  </div>
+
+  <!-- TABELA -->
+  <div class="table-responsive">
+    <table class="table table-hover align-middle">
+      <thead class="table-light">
+        <tr>
+          <th style="width: 80px;">ID</th>
+          <th>Nome</th>
+          <th>Descrição</th>
+          <th style="width: 140px;" class="text-center">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for supplier in suppliers %}
+        <tr>
+          <td>
+            <a href="{% url 'supplier_detail' supplier.id %}" class="fw-semibold text-decoration-none">
+              #{{ supplier.id }}
+            </a>
+          </td>
+
+          <td class="fw-medium">{{ supplier.name }}</td>
+
+          <td class="col-descricao" title="{{ supplier.description }}">
+            {{ supplier.description|truncatechars:100 }}
+          </td>
+
+          <td class="text-center">
+            <a href="{% url 'supplier_detail' supplier.id %}" class="btn btn-info btn-sm btn-icon" title="Visualizar">
+              <i class="bi bi-eye"></i>
+            </a>
+
+            {% if perms.suppliers.change_supplier %}
+            <a href="{% url 'supplier_update' supplier.id %}" class="btn btn-warning btn-sm btn-icon" title="Editar">
+              <i class="bi bi-pencil"></i>
+            </a>
+            {% endif %}
+
+            {% if perms.suppliers.delete_supplier %}
+            <a href="{% url 'supplier_delete' supplier.id %}" class="btn btn-danger btn-sm btn-icon btn-delete"
+              title="Excluir">
+              <i class="bi bi-trash"></i>
+            </a>
+            {% endif %}
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="4" class="text-center text-muted py-4">
+            Nenhuma marca encontrada
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PAGINAÇÃO -->
+  <div class="mt-3">
+    {% include 'components/_pagination.html' %}
+  </div>
+
+</div>
+
+{% endblock %}
