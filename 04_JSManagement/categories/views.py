@@ -1,10 +1,10 @@
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from . import models, forms
 
 
-class CategoryListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+class CategoryListView(ListView):
     model = models.Category
     template_name = 'category_list.html'
     context_object_name = 'categories'

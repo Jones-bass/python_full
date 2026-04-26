@@ -6,34 +6,6 @@ JS - Fornecedores
 
 {% block content %}
 
-<style>
-  .table th {
-    font-weight: 600;
-    font-size: 14px;
-    text-transform: uppercase;
-  }
-
-  .table td {
-    vertical-align: middle;
-  }
-
-  .col-descricao {
-    max-width: 350px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .btn-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 34px;
-    height: 34px;
-    padding: 0;
-  }
-</style>
-
 <div class="row mb-3">
   <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
 
@@ -87,18 +59,13 @@ JS - Fornecedores
               <i class="bi bi-eye"></i>
             </a>
 
-            {% if perms.suppliers.change_supplier %}
             <a href="{% url 'supplier_update' supplier.id %}" class="btn btn-warning btn-sm btn-icon" title="Editar">
               <i class="bi bi-pencil"></i>
             </a>
-            {% endif %}
-
-            {% if perms.suppliers.delete_supplier %}
             <a href="{% url 'supplier_delete' supplier.id %}" class="btn btn-danger btn-sm btn-icon btn-delete"
               title="Excluir">
               <i class="bi bi-trash"></i>
             </a>
-            {% endif %}
           </td>
         </tr>
         {% empty %}
